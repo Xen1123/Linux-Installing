@@ -27,7 +27,7 @@ printf "\n%s selected!\n" "$diskChoice"
 sleep 2
 clear
 
-PS3=$'Would you like to wipe your drive first?\nIt will be wiped regardless to install, but this means a full zeroing.\nChoose an option: '
+PS3=$'Would you like to continue? This will wipe your data to install Arch!\nChoose an option: '
 
 options=("Yes" "No")
 
@@ -35,18 +35,11 @@ select opt in "${options[@]}"; do
     case "$opt" in
 
         "Yes")
-            echo "Zeroing $diskChoice..."
-            dd if=/dev/zero of="$diskChoice" bs=16M conv=fsync status=progress
             break
             ;;
 
         "No")
-            echo "Creating a new GPT partition table..."
-            fdisk "$diskChoice" <<EOF
-g
-w
-EOF
-            break
+            exit
             ;;
 
         *)
@@ -76,7 +69,7 @@ w
 EOF
 
 clear
-lsblk -f
+lsblk -f "$diskChoice"
 
 echo "Give me the EFI partition."
 echo "It should be something like /dev/sda1 or /dev/nvme0n1p1."
@@ -85,7 +78,7 @@ echo "It is the 1GB partition."
 read -rp "EFI PARTITION: " efiPart
 
 clear
-lsblk -f
+lsblk -f "$diskChoice"
 
 echo "Give me the root partition."
 echo "It should be something like /dev/sda2 or /dev/nvme0n1p2."
@@ -113,11 +106,6 @@ if ! ping -c 5 ping.archlinux.org >/dev/null 2>&1; then
 fi
 
 echo "Internet connection looks good!"
-
-
-# -------------------------------------------------------------------
-# INSTALL BASE SYSTEM
-# -------------------------------------------------------------------
 
 echo "Installing Arch Linux..."
 
