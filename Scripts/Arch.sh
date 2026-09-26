@@ -109,7 +109,40 @@ echo "Internet connection looks good!"
 
 echo "Installing Arch Linux..."
 
-pacstrap -K /mnt sudo openssh networkmanager linux base base-devel linux-firmware grub git efibootmgr os-prober fish starship fastfetch sddm plasma plasma-workspace fastfetch konsole dolphin discover wget curl nvim vim micro nano kate firefox
+pacstrap -K /mnt sudo \
+                 openssh \
+                 networkmanager \
+                 linux \
+                 base-devel \
+                 linux \
+                 linux-firmware \
+                 grub \
+                 git \
+                 efibootmgr \
+                 os-prober \
+                 starship \
+                 fish \
+                 sddm \
+                 plasma \
+                 fastfetch \
+                 plasma-workspace \
+                 konsole \
+                 dolphin \
+                 discover \
+                 dragon \
+                 vlc \
+                 usbutils \
+                 vim \
+                 nano \
+                 micro \
+                 nvim \
+                 eza \
+                 btop \
+                 htop \
+                 kate \
+                 gwenview \
+                 wget \
+                 curl \
 
 echo "Generating fstab..."
 
