@@ -109,6 +109,7 @@ echo "Internet connection looks good!"
 
 echo "Installing Arch Linux..."
 
+pacman-key --init
 pacstrap -K /mnt sudo \
                  openssh \
                  networkmanager \
