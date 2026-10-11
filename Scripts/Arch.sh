@@ -265,7 +265,6 @@ echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 echo "Enabling services..."
 
 systemctl enable NetworkManager
-systemctl enable sddm
 
 mkdir -p "/home/$userChoice/.config/fish"
 mkdir -p "/home/$userChoice/.config/fastfetch"
@@ -597,6 +596,30 @@ set mouse=a
 map <F2> :wq<CR>
 map <F5> :q!<CR> 
 VIM
+
+PS3="Which would you like to install, KDE, or GNOME? GNOME is more of a macOS style, while KDE looks more like Windows.
+"
+options=("KDE" "GNOME" "Neither")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "GNOME")
+            pacman -S gnome gdm ptyxis eog --noconfirm
+            systemctl enable gdm
+            ;;
+        "KDE")
+            pacman -S plasma sddm discover kate konsole dolphin libcec plasma-bigscreen --noconfirm
+            systemctl enable sddm
+            ;;
+        "Neither")
+            break
+            ;;
+        *)
+            echo "Invalid Option: $REPLY"
+            ;;
+        esac
+    done
+
 
 echo
 echo "========================================"
