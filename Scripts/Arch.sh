@@ -376,7 +376,7 @@ alias nala='sudo nala'
 alias pacman='sudo pacman'
 alias vim='nvim'
 set -Ux STARSHIP_CONFIG "/home/$USER/.config/starship/starship.toml"
-alias yt-dlp='yt-dlp -x --audio-format mp3 --audio-quality 2 --embed-metadata --embed-thumbnail -o "%(title)s.%(ext)s"'
+alias yt-dlp='yt-dlp -f "bestaudio" -x --audio-format mp3 --embed-metadata --embed-thumbnail -o "%(title)s.%(ext)s"'
 starship init fish | source
 FISH
 
